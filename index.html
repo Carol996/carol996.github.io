@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
-    <!---------------------------------------Head-------------------------------------------->
+    
+    <!---------------------Head------------------------->
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width" />
@@ -8,26 +9,28 @@
         <link rel="stylesheet" type="text/css" href="stylesheet/portfolio.css">
     </head>
 
-    <!-------------------------------------------------Body----------------------------------------------->
+    <!--------------------Body--------------------------->
     <body class="Background">
         
         <!--Navbar-->
         <div class="Navbar">
             <a class="active" href="#Home">HOME</a>
+            <a href="#Slideshow"></a>
             <a href="#About">ABOUT ME</a>
             <a href="#GitHub">GITHUB</a>
-            <a href="#Contact">CONTACT</a>
+            <!---------- functions for contact form ------->
+            <a onclick="openForm()" ondblclick="closeForm()" class="contact">CONTACT</a><!-- functions were added here, spec in js doc-->
         </div>
 
-        <!---------------------------- space between navbar and the first heading ----------------------------------->
+        <!---- space between navbar and the first heading -------->
         <br>
         <br>
 
-        <!-------------------------------------Home Section----------------------------->
+        <!--------------Home Section-------->
         <div id="Home">
         </div>
 
-        <!---------------------------------------Banner text----------------------------->
+        <!---------------Banner text------------------->
         <div class="banner_text">
             <h1 class="white-text">Welcome!</h1>
             <strong>
@@ -41,11 +44,48 @@
             </strong>
         </div>
 
-        <!-----------------------------------About Me section--------------------------->
-        <div id="About">
+        <!---------slideshow section ----------->
+        <div id="Slideshow">
+            <div id="Slideshow_Background">
+                <div id="Slideshow_Container">
+                    
+                    <div class="mySlides fade">
+                        <img class="Slideshow_Images" src="./images/computer.jpg" alt="">
+                        <div class="text">Contact me to assist with your project</div>                        
+                    </div>
+                    <div class="mySlides fade">
+                        <img class="Slideshow_Images" src="./images/GitHub.png" alt="">
+                        <div class="text">I am currently a student learning Software Development</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <img class="Slideshow_Images" src="./images/sample.jpeg" alt="">
+                        <div class="text">These are some of the languages I've learned so far</div>
+                    </div>
+                    <div class="mySlides fade">
+                        <img class="Slideshow_Images" src="./images/newcon.jpg" alt="">
+                        <div class="text">I also have a background in Business Management</div>
+                    </div>
+                    <!-- Previous and next buttons -->
+                    <a class="Previous" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="Next" onclick="plusSlides(1)">&#10095;</a>                 
+                </div>
+                <br>
+                
+                <div style="text-align: center">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span> 
+                    <span class="dot" onclick="currentSlide(4)"></span>     
+                </div>        
+            </div>
+        </div>
+
+
+        <!-----------About Me section------------------------>
+        <div id="About"> <!---- add class= "row" if odd format ------>
             <div class="jumbotron jumbotron-fluid bg-info text-center">
-                <br>
-                <br>
+                
+                
                 <h1>About Me</h1>
                 <p class="center">
                     Currently, I am a student enrolled in the Software Development bootcamp at <a href="https://www.learncodinganywhere.com" target="_blank">The Tech Academy</a> 
@@ -61,7 +101,7 @@
             </div>
         </div>
 
-        <!-----------------------------------GitHub section----------------------------->
+        <!------------GitHub section-------------->
         <div class="Row" id="GitHub">
             <!--Left column-->
             <div class="Column_1">
@@ -78,34 +118,48 @@
             </div>
         </div>
 
-        <!-----------------------------------Contact section----------------------------->
+        <!----------- Second Set of Columns --------------->
         <div class="Row" id="Contact">
-            <!----------------left column--------------------->
+            <!-------left column------------>
             <div class="Column_2 Column_tall">
                 <img src="../Student_Portfolio/images/newcon.jpg" alt="">
             </div>
-            <!----------------right column--------------------->
+            <!------right column------------>
             <div class="Column_1 Column_tall">
-                <h1>Contact</h1>
-                
-                <form action="https://formspree.io/f/xbjbkyye" method="POST">
-                    <label>Name:</label>
-                        <input type="text" placeholder="Please enter your name here">
-                    <label>Email:</label>
-                        <input type="text" id="Email" name="Email" placeholder="Please enter your email here">
-                    <label>Message:</label>
-                        <input type="text" id="Message" name="Message" placeholder="Please write your message here">
-                        <input type="submit" value="SUBMIT">
-                </form>
+                <h1>Other Projects</h1>
+                 <p class="center">I am currently working on creating additional content and will be adding more soon.</p>              
             </div>
         </div>
+
+        <!--- contact form ----->
+        <div id="Contact">
+            <button onclick="openForm()" class="Pop_Up_Button">CONTACT</button>
+            <div class="form-popup" id="myForm">
+                 <form action="https://formspree.io/info@learncodinganywhere.com" method="POST" class="form-container"> <!-- Here we are using a free online service from https://formspree.io/ to send our contact form to an email address of our choosing - note: it will not run unless live on the internet, you have to push it to your online website first -->
+                     <h1>Contact</h1>
+                     <label for="name"><b>Name</b></label>
+                       <input type="text" placeholder="Name" name="name" required>
+                     <label for="phone"><b>Phone</b></label>
+                       <input type="text" placeholder="Phone" name="phone">
+                     <label for="email"><b>Email</b></label>		
+                       <input type="text" placeholder="Email" name="email" required>
+                     <label for="message"><b>Message</b></label>
+                       <input type="text" placeholder="Message" name="message">
+          
+                     <button type="submit" class="btn">SUBMIT</button>
+                     <button type="button" class="btn cancel" onclick="closeForm()">CLOSE</button>
+                 </form>
+            </div>
+         </div>
 
         <!--Footer section-->
         <footer>
             <p>
-                <p class="center">Carolina Espinosa <a href="mailto: espinosa.priolo@gmail.com">Email</a></p>
+                <p class="center">Carolina Espinosa | 2022 | <a href="mailto: espinosa.priolo@gmail.com">Send me an email</a></p>
                 <br>
             </p>
         </footer>
+
+    <script src="./js/main.js"></script>
     </body>
 </html>

@@ -1,7 +1,23 @@
 /***** GENERAL STYLING *****/
+html    {
+    scroll-behavior: smooth;
+}
+
 /* Body */
 body {
-    margin: 0%
+    background-color: #ffecd1;
+    margin: 0%;
+    opacity: 1; /* This and transition affect the page loading fade in effect */
+    transition: 3s opacity; /* This causes a 3 second fade in */
+    letter-spacing: .2vw; /* vw is a relative measurement, 1vw is equal to 1% of the viewport width */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.5vw; 
+    overflow-x: hidden; /* This prevents the horizontal scroll bar from appearing when the quote is hovered over */
+    user-select: none; /* This prevents the text on the webpage from being highlighted by the user */
+}
+
+body.fade-out   {
+    opacity: .1;
 }
 
 /* Heading 1 elements */
@@ -45,6 +61,7 @@ p {
 /* Anchor elements */
 a {
     color: blue;
+    cursor: pointer;
 }
 
 /* Quotation elements */
@@ -156,98 +173,246 @@ footer {
 }
 /***** END OF VIDEO STYLING *****/
 
+/******** SLIDESHOW STYLING *******/
+#Slideshow_Background   {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.mySlides   {
+    display: none;
+}
+
+#Slideshow_Container    {
+    width: 39.5vw;
+    height: auto;
+    padding-top: 4%;
+    position: relative;
+    margin:auto;
+}
+
+/* Remove the underline from the previous and next buttons on the slideshow */
+#Slideshow_Container a {
+    text-decoration: none;
+}
+
+.Slideshow_Images {
+    vertical-align: middle; /* This centers the images vertically within the slideshow container */
+    height: auto;
+    box-shadow: 0px 5px 10px 12px rgba(0, 0, 0, .75);
+    width: 100%;
+}
+
+.Previous, .Next {
+    cursor: pointer;
+    position: absolute; /* This makes the next and previous buttons positioned relative to the slideshow container */
+    top: 50%; /* This moves the buttons up in the slideshow container */
+    width: auto;
+    padding: 2vw;
+    color: darkgray; 
+    font-size: 1.5vw;
+    border-radius: 0 3px 3px 0;
+    user-select: none; /* This property makes it so that the user cannot highlight the text */
+    transition: 0.6s ease;
+}
+
+.Next {
+    right: 0; /* This moves the next button to the right side of the slideshow container */
+    border-radius: 3px 0 0 3px;
+}
+
+/* Hover effect on slide show buttons */
+.Previous:hover, .Next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+}
+
+.text {
+    color: white; 
+    padding: 1vw;
+    position: absolute; /* This ensures the text is positioned within the image */
+    bottom: 0; /* This property sets the text at the bottom of the image */
+    width: 100%;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: .1vw; /* This gives slight spacing between the letters */
+    font-size: 1.5vw;
+    background-color: rgba(0, 0, 0, 0.75);
+    font-weight: bold;
+    border-radius: 0px 0px 7px 7px; /* Gives the text background rounded corners on the bottom left and right corners */
+}
+
+.dot {
+    cursor: pointer;
+    height: 1vw;
+    width: 1vw;
+    margin: .25vw;
+    background-color: white;
+    border-radius: 50%; /* Makes the dots circles by rounding each corner */
+    display: inline-block; /* Allows the dots to sit next to eachother rather than on a new line */
+    transition: background-color 0.6s ease; /* When clicked on the dots transition to a different color when clicked or hovered over (the affect is defined below) */
+    z-index: 1; /* This ensures the dots will be displayed above any other elements */
+}
+
+.active, .dot:hover {
+    background-color: black;
+}
+
+/* Fading animation for slideshow */
+.fade {
+    animation-name: fade; 
+    animation-duration: 1.5s; /* The animation lasts 1.5 seconds */
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4;} /* Image starts transparent */
+    to {opacity: 1;} /* Image ends opaque */
+}
+
+@keyframes fade {
+    from {opacity: .4;} 
+    to {opacity: 1;} 
+}
+/***** END SLIDESHOW STYLING *****/
+
+
+
 /***** TABLE STYLING *****/
-* { /* The asterisk is a universal selector that applies this effect to all elements on the page */
-    box-sizing: border-box; /* This creates a box with a border within which we will place most of our text */
-} 
+* {
+    box-sizing: border-box;
+}
 
 .Column_1 {
     float: left;
     width: 50%; /* This ensures the column takes up half of the page width */
-    padding: 10px;
-    padding-top: 3%;
-    height: 400px; /*adjust based on text entered*/
-    background-color: #ffecd1; /* Sets the background color of the columns with class Column_1 */
-}
-
-/* Screens 576px and smaller will display a scroll bar if the text overflows the column height */
-@media screen and (max-width: 576px) {
-    .Column_1 {
-        overflow: auto;
-    }
+    padding: 1.6%;
+    height: 450px; /* This sets the height of the column to 400px -  this may need to be adjusted depending on the text you enter */
+    background-color: #fff;
 }
 
 .Column_2 {
     float: left;
     width: 50%;
-    padding: 10px;
-    padding-top: 1.9%;
-    height: 400px;
+    padding: 1.6%;
+    height: 450px;
     background-color: #B85900;
 }
 
-/* This class is applied to the columns in the final row, 
-overriding the height and padding to provide more room for the contact form  
-while keeping the rest of the formatting from Column_1 or Column_2 */
-.Column_tall {
-    padding-top: 3.5%;
-    height: 450px;
-}
-
-/* This inserts something after the content of selected elements (in this case the elements with class "Row") */
 .Row:after {
-	content: ""; /* By leaving this blank, we are allowing the footer (covered lower down) to be displayed - removing it makes the footer overwrite a column */
-	display: table; /*specifies the type of display behavior; the table value tells the browser to treat the element as a table */
-	clear: both; /*clears any other elements from floating on the left or the right of an element */
+	content: ""; /* By leaving this blank, we are allowing the footer to be displayed*/
+	display: table; /* Table value tells the browser to treat the element as a table */
+	clear: both; /* This clears any other elements from floating on the left or the right of an element */
 }
 /***** END OF TABLE STYLING *****/
 
-/***** CONTACT FORM STYLING *****/
 
-input[type=text] {
-    width: 100%;
-    padding: 12px; 
-    border: 1px solid #ffecd1;
-    border-radius: 4px; 
-    box-sizing: border-box; /* creates a box with a border around the contact form input boxes */
-    margin-top: 6px; 
-    margin-bottom: 16px; 
-    resize: vertical; /* This allows the user to resize the text boxes vertically */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+
+
+/***** CONTACT FORM STYLING *****/
+.Pop_Up_Button {
+    position: fixed;
+    bottom: 1.75vw; 
+    right: 1.75vw;
+    width: 25vw;
+    background-color: white;
+    color: #001524;
+    border: solid #001524;
+    cursor: pointer;
+    -webkit-animation: movePopup 5s;
+    animation: movePopup 5s;
 }
 
-/* Hover effects for input boxes */
-input[type=text]:hover {
-    box-shadow: 0 0 5px #00004d inset;
+/* movePopup animation moves the button from off the right side of the screen to its fixed location on the viewport */
+@keyframes movePopup {
+    from {right: -40vw;} 
+    to {right: 1.75vw;}
+}
+
+@-webkit-keyframes movePopup {
+    from {right: -40vw;} 
+    to {right: 1.75vw;}
+}
+
+/* Styling for the contact form */
+.form-popup {
+    z-index: 8; /* This z-index ensures the contact form shows above all other elements on the page */
+    display: none;
+    position: fixed;
+    bottom: .5vw; /* Slightly up from the bottom of the viewport --note that positions can also be specified in vw */
+    right: .5vw; 
+}
+
+/* Form styling */
+.form-container {
+    max-width: 49vw; /* Relative sizing of the form container - 49% of the viewport width */
+    padding: 1vw; /* Adds padding between the form-popup and the form-container 
+    --note that padding can also be vw */
+    background-color: white; 
+}
+
+/* Input fields */
+.form-container input[type=text] {
+    width: 100%;
+    padding: .93vw;
+    margin: .6vw 0 .6vw 0;
+    border: none;
+    background: Gainsboro;
+    font-size: 1vw;
+}
+
+/* General styling for all buttons */
+button {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    letter-spacing: .3vw;
+    font-size: 1.5vw; 
+    padding: 1.5vw;
+    cursor: pointer;
+    width: 100%;
+    height: auto;
+}
+
+/* Hover effect for contact and submit buttons */
+button:hover, .form-container .btn:hover {
+    color: white;
+    background-color: #B85900; 
+    transition-duration: 1s;
+    -webkit-transition-duration: 1s; 
+    border-color: #B85900;
 }
 
 /* Submit button */
-input[type=submit] {
-    background-color: #001524;
+.form-container .btn {
+    background-color: white; 
+    color: black;
+    border-color: black;
+    margin-bottom: 1vh; /* Adds space between the submit button and the close button */
+}
+
+/* Close button */
+.form-container .cancel {
+    background-color: black;
     color: white;
-    font-weight: bold;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-color: gray;
 }
 
-/* Hover effect for submit button */
-input[type=submit]:hover {
-    background-color: white;
-    color: #001524;
-    transform: none;
-}
-
-/* Form element */
-form {
-    border-radius: 1px;
-    background-color: #ffecd1; 
-    padding: 10px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Close button */
+.form-container .cancel:hover {
+    color: white;
+    background-color: darkred;
+    transition-duration: 1s;
+    -webkit-transition-duration: 1s;
+    border-color: black;
 }
 /***** END OF CONTACT FORM STYLING *****/
+
+
+/*Media rule for navbar links for different screen sizes*/
+@media screen and (max-width: 1080px) {
+    .Navbar a{
+        width: 20%; /* This sets each navbar link to 1/5 of the navbar */
+        font-size: 2.5vw;
+    }
+}
+
